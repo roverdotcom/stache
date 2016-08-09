@@ -33,7 +33,9 @@ func parseContextStrings(cs []string) map[string]string {
 
 	for _, el := range cs {
 		a := strings.SplitN(el, "=", 2)
-		context[a[0]] = a[1]
+		if len(a) == 2 {
+			context[a[0]] = a[1]
+		}
 	}
 	return context
 }
