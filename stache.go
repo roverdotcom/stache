@@ -56,7 +56,12 @@ func main() {
 
 	} else if (stat.Mode() & os.ModeCharDevice) == 0 {
 		// Probably a unix pipe
-		stdinBytes, _ := ioutil.ReadAll(os.Stdin)
+		stdinBytes, err := ioutil.ReadAll(os.Stdin)
+		if err != nil {
+			fmt.Println("Error:", err)
+			os.Exit(1)
+
+		}
 		templateString = string(stdinBytes)
 	} else {
 		flag.Usage()
